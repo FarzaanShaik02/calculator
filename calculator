@@ -1,0 +1,71 @@
+def add(operands):
+    return sum(operands)
+def sub(operands):
+    result=operands[0]
+    for num in operands[1:0]:
+        result-=num
+    return result
+def mult(operands):
+    result=operands[0]
+    for num in operands[1:]:
+        result*=num
+    return result
+def div(operands):
+    result=operands[0]
+    for num in operands[1:]:
+        if num==0:
+            print("Error!,Zero Division Error.")
+        result/=num
+    return result
+
+def print_history(history):
+    if history:
+        print("History calculation is:")
+        for entry in history:
+            print(entry)
+    else:
+        print("No entries!!")
+
+def calculator(history):
+    print("Select your option from given options:")
+    print("1.Addition")
+    print("2.Subtraction")
+    print("3.Multiplication")
+    print("4.Division")
+    print("5.History")
+    while True:
+        choice=input("Enter your choice[1./2./3./4./5.]:")
+        if choice in ["1","2","3","4"]:
+            try:
+                num_operands=int(input("Enter the no.of operands:"))
+                operands=[]
+                for i in range(num_operands):
+                    operands.append(float(input(f"Enter {i+1} operand:")))
+            except:
+                print("Enter a numeric valid input!!")
+        if choice=="1":
+            result=add(operands)
+            print(f"{' + '.join(map(str,operands))}={result}")
+            history.append(f"{' + '.join(map(str,operands))}={result}")
+        elif choice=="2":
+            result=sub(operands)
+            print(f"{' - '.join(map(str,operands))}={result}")
+            history.append(f"{' - '.join(map(str,operands))}={result}")
+        elif choice=="3":
+            result=mult(operands)
+            print(f"{' * '.join(map(str,operands))}={result}")
+            history.append(f"{' * '.join(map(str,operands))}={result}")
+        elif choice=="4":
+            result=div(operands)
+            if result=="Error!,Zero Division Error.":
+                print("Zero Division Error!")
+            else:
+                print(f"{' / '.join(map(str,operands))}={result}")
+                history.append(f"{' - '.join(map(str,operands))}={result}")
+        elif choice=="5":
+            print_history(history)
+        else:
+            print("Enter a invalid input")
+if __name__=="__main__":
+    history=[]
+    calculator(history)
